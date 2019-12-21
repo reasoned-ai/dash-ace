@@ -8,7 +8,9 @@ class App extends Component {
     constructor() {
         super();
         this.state = {
-            value: ''
+            value: '',
+            mode: 'python',
+            theme: 'twilight'
         };
         this.setProps = this.setProps.bind(this);
     }

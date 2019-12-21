@@ -247,6 +247,9 @@ venv.bak/
 *.tmPreferences.cache
 *.stTheme.cache
 
+*wps-hmr.js
+*wps-hmr.json
+
 # Workspace files are user-specific
 *.sublime-workspace
 

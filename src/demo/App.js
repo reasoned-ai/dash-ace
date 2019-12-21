@@ -1,7 +1,7 @@
 /* eslint no-magic-numbers: 0 */
 import React, {Component} from 'react';
 
-import { AceEditor } from '../lib';
+import { DashAceEditor } from '../lib';
 
 class App extends Component {
 
@@ -20,7 +20,7 @@ class App extends Component {
     render() {
         return (
             <div>
-                <AceEditor
+                <DashAceEditor
                     setProps={this.setProps}
                     {...this.state}
                 />

@@ -6,10 +6,9 @@ import dash_html_components as html
 app = dash.Dash(__name__)
 
 app.layout = html.Div([
-    dash_ace.AceEditor(
+    dash_ace.DashAceEditor(
         id='input',
-        value='my-value',
-        label='my-label'
+        value='Class A'
     ),
     html.Div(id='output')
 ])

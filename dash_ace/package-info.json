@@ -1,6 +1,6 @@
 {
   "name": "dash_ace",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Dash Ace Editor Component",
   "repository": {
     "type": "git",
@@ -24,7 +24,10 @@
   "author": "xu miao <xu@reasoned.ai>",
   "license": "MIT",
   "dependencies": {
-    "ramda": "^0.26.1"
+    "ace-builds": "^1.4.7",
+    "classnames": "^2.2.6",
+    "ramda": "^0.26.1",
+    "react-ace": "^8.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.5.4",

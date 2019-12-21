@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
-import AceEditor from './components/AceEditor.react';
+import DashAceEditor from './components/DashAceEditor.react';
 
 export {
-    AceEditor
+    DashAceEditor
 };

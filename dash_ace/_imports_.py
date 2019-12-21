@@ -1,5 +1,5 @@
-from .AceEditor import AceEditor
+from .DashAceEditor import DashAceEditor
 
 __all__ = [
-    "AceEditor"
+    "DashAceEditor"
 ]

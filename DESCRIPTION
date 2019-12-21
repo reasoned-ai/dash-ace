@@ -1,6 +1,6 @@
 Package: dashAce
 Title: Dash Ace Editor Component
-Version: 0.0.1
+Version: 0.0.2
 Authors @R: as.person(c(xu miao <xu@reasoned.ai>))
 Description: Dash Ace Editor Component
 Depends: R (>= 3.0.2)

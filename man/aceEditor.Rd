@@ -10,7 +10,7 @@ ExampleComponent is an example component. It takes a property, `label`, and disp
 }
 
 \usage{
-aceEditor(id=NULL, label=NULL, value=NULL)
+aceEditor(id=NULL, label=NULL, value=NULL, className=NULL)
 }
 
 \arguments{
@@ -19,4 +19,6 @@ aceEditor(id=NULL, label=NULL, value=NULL)
 \item{label}{Character. A label that will be printed when this component is rendered.}
 
 \item{value}{Character. The value displayed in the input.}
+
+\item{className}{Character. Often used with CSS to style elements with common properties.}
 }

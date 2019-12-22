@@ -73,7 +73,18 @@
         "required": false,
         "description": "Font size",
         "defaultValue": {
-          "value": "20",
+          "value": "14",
+          "computed": false
+        }
+      },
+      "focus": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "Focus",
+        "defaultValue": {
+          "value": "false",
           "computed": false
         }
       },
@@ -215,7 +226,7 @@
         "required": false,
         "description": "Properties to apply directly to the Ace editor instance",
         "defaultValue": {
-          "value": "{ $blockScrolling: Infinity}",
+          "value": "{ $blockScrolling: true }",
           "computed": false
         }
       },

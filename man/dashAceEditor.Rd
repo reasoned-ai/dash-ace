@@ -11,12 +11,12 @@ Dash component wraps up react-ace editor https://github.com/securingsincity/reac
 
 \usage{
 dashAceEditor(id=NULL, value=NULL, className=NULL, placeholder=NULL, mode=NULL, theme=NULL,
-fontSize=NULL, showGutter=NULL, showPrintMargin=NULL, highlightActiveLine=NULL,
-cursorStart=NULL, wrapEnabled=NULL, readOnly=NULL, minLines=NULL, maxLines=NULL,
-enableBasicAutocompletion=NULL, enableLiveAutocompletion=NULL,
-enableSnippets=NULL, tabSize=NULL, debounceChangePeriod=NULL, editorProps=NULL,
-setOptions=NULL, keyboardHandler=NULL, commands=NULL, annotations=NULL,
-markers=NULL, style=NULL)
+fontSize=NULL, focus=NULL, showGutter=NULL, showPrintMargin=NULL,
+highlightActiveLine=NULL, cursorStart=NULL, wrapEnabled=NULL, readOnly=NULL,
+minLines=NULL, maxLines=NULL, enableBasicAutocompletion=NULL,
+enableLiveAutocompletion=NULL, enableSnippets=NULL, tabSize=NULL,
+debounceChangePeriod=NULL, editorProps=NULL, setOptions=NULL,
+keyboardHandler=NULL, commands=NULL, annotations=NULL, markers=NULL, style=NULL)
 }
 
 \arguments{
@@ -33,6 +33,8 @@ markers=NULL, style=NULL)
 \item{theme}{Character. Theme to use}
 
 \item{fontSize}{Numeric. Font size}
+
+\item{focus}{Logical. Focus}
 
 \item{showGutter}{Logical. Show gutter}
 

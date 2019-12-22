@@ -9,8 +9,10 @@ class App extends Component {
         super();
         this.state = {
             value: '',
-            mode: 'python',
-            theme: 'twilight'
+            mode: 'norm',
+            theme: 'tomorrow',
+            enableBasicAutocompletion: true,
+            enableLiveAutocompletion: true
         };
         this.setProps = this.setProps.bind(this);
     }

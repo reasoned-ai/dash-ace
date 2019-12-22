@@ -9,21 +9,28 @@ import 'ace-builds/src-min-noconflict/ext-spellcheck';
 
 import "ace-builds/src-min-noconflict/mode-python";
 import "ace-builds/src-min-noconflict/mode-sql";
-import "ace-builds/src-min-noconflict/mode-javascript";
 import "ace-builds/src-min-noconflict/theme-github";
 import "ace-builds/src-min-noconflict/theme-monokai";
 import "ace-builds/src-min-noconflict/theme-tomorrow";
 import "ace-builds/src-min-noconflict/theme-twilight";
 import "ace-builds/src-min-noconflict/theme-textmate";
 
+import NormMode from "./NormMode";
 
 /**
  * Dash component wraps up react-ace editor
  * https://github.com/securingsincity/react-ace
  */
 export default class DashAceEditor extends Component {
+
+    componentDidMount() {
+        if (this.props.mode === 'norm') {
+            this.refs.aceEditor.editor.getSession().setMode(new NormMode());
+        }
+    }
+
     render() {
-        const {id, mode, theme, className, value, placeholder, fontSize, showGutter, showPrintMargin,
+        const {id, mode, theme, className, value, focus, placeholder, fontSize, showGutter, showPrintMargin,
             highlightActiveLine, cursorStart, wrapEnabled, readOnly, minLines, maxLines,
             enableBasicAutocompletion, enableLiveAutocompletion, enableSnippets, tabSize, debounceChangePeriod,
             editorProps, setOptions, keyboardHandler, commands, annotations, markers, style,
@@ -31,7 +38,8 @@ export default class DashAceEditor extends Component {
 
         return (
             <AceEditor
-                mode={mode}
+                ref="aceEditor"
+                mode={mode==='norm'?'text':mode}
                 theme={theme}
                 value={value}
 				className={classnames('container__editor', className)}
@@ -39,6 +47,7 @@ export default class DashAceEditor extends Component {
                 name={id}
                 placeholder={placeholder}
                 fontSize={fontSize}
+                focus={focus}
                 showGutter={showGutter}
                 showPrintMargin={showPrintMargin}
                 highlightActiveLine={highlightActiveLine}
@@ -70,7 +79,8 @@ DashAceEditor.defaultProps = {
     mode: 'python',
     theme: 'monokai',
     value: '',
-    fontSize: 20,
+    fontSize: 14,
+    focus: false,
     showGutter: true,
     showPrintMargin: true,
     highlightActiveLine: true,
@@ -81,7 +91,7 @@ DashAceEditor.defaultProps = {
     enableLiveAutocompletion: false,
     enableSnippets: false,
     tabSize: 4,
-    editorProps: { $blockScrolling: Infinity}
+    editorProps: { $blockScrolling: true }
 };
 
 DashAceEditor.propTypes = {
@@ -119,6 +129,11 @@ DashAceEditor.propTypes = {
      * Font size
      */
     fontSize: PropTypes.number,
+
+    /**
+     * Focus
+     */
+    focus: PropTypes.bool,
 
     /**
      * Show gutter

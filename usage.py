@@ -8,11 +8,13 @@ app = dash.Dash(__name__)
 app.layout = html.Div([
     dash_ace.DashAceEditor(
         id='input',
-        value='def test(a: int) -> str:\n'
+        value='test(a: integer) -> string := \n'
               '    return f"value is {a}"',
-        theme='github',
-        mode='python',
-        placeholder='Python code ...'
+        theme='tomorrow',
+        mode='norm',
+        enableBasicAutocompletion=True,
+        enableLiveAutocompletion=True,
+        placeholder='Norm code ...'
     ),
     html.Div(id='output')
 ])

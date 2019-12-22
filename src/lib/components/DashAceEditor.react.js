@@ -23,31 +23,46 @@ import NormMode from "./NormMode";
  */
 export default class DashAceEditor extends Component {
 
-    componentDidMount() {
+    customize(editor) {
         if (this.props.mode === 'norm') {
-            this.refs.aceEditor.editor.getSession().setMode(new NormMode());
+            editor.getSession().setMode(new NormMode());
         }
-        const autocompleter = this.props.autocompleter;
+
+        const {autocompleter, prefixLine, triggerWords, triggerCaseInsensitive} = this.props;
+
         if (autocompleter) {
             const langTools = window.ace.acequire("ace/ext/language_tools");
-            const rhymeCompleter = {
+            const reg = triggerWords? new RegExp(triggerWords.map(w => {return w + "\\s*$"}).join('|'),
+                triggerCaseInsensitive?'i':null) : null;
+            const completer = {
                 getCompletions: function(editor, session, pos, prefix, callback) {
-                    if (prefix.length === 0) {
-                        callback(null, []);
-                        return
+                    const line = (prefix.length === 0 && prefixLine) ?
+                        editor.getValue().split('\n')[pos.row].substring(0, pos.column) : prefix;
+                    if (reg === null || reg.test(line)) {
+                        fetch(autocompleter + line)
+                            .then(response => response.json())
+                            .then(wordList => {
+                                callback(null, wordList);
+                            })
+                            .catch((error) => {
+                                console.error(error)
+                            })
                     }
-                    fetch(autocompleter + prefix)
-                        .then(response => response.json())
-                        .then(wordList => {
-                            callback(null, wordList);
-                        })
-                        .catch((error) => {
-                            console.error(error)
-                        })
+                    callback(null, []);
                 }
             };
-            langTools.addCompleter(rhymeCompleter);
+            langTools.addCompleter(completer);
         }
+    }
+
+    increaseFontSize(ref) {
+        const currentFontSize = ref.aceEditor.editor.getFontSize();
+        ref.aceEditor.editor.setFontSize(currentFontSize + 1);
+    }
+
+    decreaseFontSize(ref) {
+        const currentFontSize = ref.aceEditor.editor.getFontSize();
+        ref.aceEditor.editor.setFontSize(currentFontSize - 1);
     }
 
     render() {
@@ -57,6 +72,19 @@ export default class DashAceEditor extends Component {
             editorProps, setOptions, keyboardHandler, commands, annotations, markers, style,
             setProps} = this.props;
 
+        const fontAdjust = [
+            {
+                name: 'increaseFontSize',
+                bindKey: {win: 'Ctrl-=', mac: 'Command-='},
+                exec: () => { this.increaseFontSize(this.refs) }
+            },
+            {
+                name: 'decreaseFontSize',
+                bindKey: {win: 'Ctrl--', mac: 'Command--'},
+                exec: () => { this.decreaseFontSize(this.refs) }
+            }
+        ];
+
         return (
             <AceEditor
                 ref="aceEditor"
@@ -65,6 +93,7 @@ export default class DashAceEditor extends Component {
                 value={value}
 				className={classnames('container__editor', className)}
                 onChange={code => setProps({ value: code })}
+                onLoad={editor => this.customize(editor)}
                 name={id}
                 placeholder={placeholder}
                 fontSize={fontSize}
@@ -85,7 +114,7 @@ export default class DashAceEditor extends Component {
                 editorProps={editorProps}
                 setOptions={setOptions}
                 keyboardHandler={keyboardHandler}
-                commands={commands}
+                commands={commands?fontAdjust.concat(commands):fontAdjust}
                 annotations={annotations}
                 markers={markers}
                 style={style}
@@ -112,6 +141,8 @@ DashAceEditor.defaultProps = {
     enableLiveAutocompletion: false,
     enableSnippets: false,
     tabSize: 4,
+    prefixLine: false,
+    triggerCaseInsensitive: true,
     editorProps: { $blockScrolling: true }
 };
 
@@ -210,6 +241,21 @@ DashAceEditor.propTypes = {
      * Custom autocompletion endpoint
      */
     autocompleter: PropTypes.string,
+
+    /**
+     * Custom autocompletion prefix line or word
+     */
+    prefixLine: PropTypes.bool,
+
+    /**
+     * Custom autocompletion trigger words
+     */
+    triggerWords: PropTypes.arrayOf(PropTypes.string),
+
+    /**
+     * Custom autocompletion trigger word case insensitive
+     */
+    triggerCaseInsensitive: PropTypes.bool,
 
     /**
      * Enable snippets

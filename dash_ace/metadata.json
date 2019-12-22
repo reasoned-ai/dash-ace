@@ -2,7 +2,20 @@
   "src/lib/components/DashAceEditor.react.js": {
     "description": "Dash component wraps up react-ace editor\nhttps://github.com/securingsincity/react-ace",
     "displayName": "DashAceEditor",
-    "methods": [],
+    "methods": [
+      {
+        "name": "customize",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "editor",
+            "type": null
+          }
+        ],
+        "returns": null
+      }
+    ],
     "props": {
       "id": {
         "type": {
@@ -187,6 +200,45 @@
         "description": "Enable live autocompletion",
         "defaultValue": {
           "value": "false",
+          "computed": false
+        }
+      },
+      "autocompleter": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Custom autocompletion endpoint"
+      },
+      "prefixLine": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "Custom autocompletion prefix line or word",
+        "defaultValue": {
+          "value": "false",
+          "computed": false
+        }
+      },
+      "triggerWords": {
+        "type": {
+          "name": "arrayOf",
+          "value": {
+            "name": "string"
+          }
+        },
+        "required": false,
+        "description": "Custom autocompletion trigger words"
+      },
+      "triggerCaseInsensitive": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "Custom autocompletion trigger word case insensitive",
+        "defaultValue": {
+          "value": "true",
           "computed": false
         }
       },

@@ -17,12 +17,16 @@ app = dash.Dash(__name__,
 app.layout = html.Div([
     dash_ace.DashAceEditor(
         id='input',
-        value='test(a: integer) -> string := \n'
+        value='test(a: Integer) -> String := \n'
               '    return f"value is {a}"',
-        theme='tomorrow',
+        theme='github',
         mode='norm',
+        tabSize=2,
         enableBasicAutocompletion=True,
         enableLiveAutocompletion=True,
+        autocompleter='/autocompleter?prefix=',
+        prefixLine=True,
+        triggerWords=[':', '\\.', '::'],
         placeholder='Norm code ...'
     ),
     html.Div(id='output')
@@ -32,7 +36,7 @@ app.layout = html.Div([
 @server.route('/autocompleter', methods=['GET'])
 def autocompleter():
     prefix = request.args.get('prefix')
-    return jsonify([{"name": prefix + "_completed", "value": prefix + "_completed", "score": 300, "meta": "test"}])
+    return jsonify([{"name": "Completed", "value": "Completed", "score": 300, "meta": "test"}])
 
 
 @app.callback(Output('output', 'children'), [Input('input', 'value')])

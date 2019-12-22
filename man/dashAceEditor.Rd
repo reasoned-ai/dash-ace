@@ -14,8 +14,9 @@ dashAceEditor(id=NULL, value=NULL, className=NULL, placeholder=NULL, mode=NULL, 
 fontSize=NULL, focus=NULL, showGutter=NULL, showPrintMargin=NULL,
 highlightActiveLine=NULL, cursorStart=NULL, wrapEnabled=NULL, readOnly=NULL,
 minLines=NULL, maxLines=NULL, enableBasicAutocompletion=NULL,
-enableLiveAutocompletion=NULL, enableSnippets=NULL, tabSize=NULL,
-debounceChangePeriod=NULL, editorProps=NULL, setOptions=NULL,
+enableLiveAutocompletion=NULL, autocompleter=NULL, prefixLine=NULL,
+triggerWords=NULL, triggerCaseInsensitive=NULL, enableSnippets=NULL,
+tabSize=NULL, debounceChangePeriod=NULL, editorProps=NULL, setOptions=NULL,
 keyboardHandler=NULL, commands=NULL, annotations=NULL, markers=NULL, style=NULL)
 }
 
@@ -55,6 +56,14 @@ keyboardHandler=NULL, commands=NULL, annotations=NULL, markers=NULL, style=NULL)
 \item{enableBasicAutocompletion}{Logical. Enable basic autocompletion}
 
 \item{enableLiveAutocompletion}{Logical. Enable live autocompletion}
+
+\item{autocompleter}{Character. Custom autocompletion endpoint}
+
+\item{prefixLine}{Logical. Custom autocompletion prefix line or word}
+
+\item{triggerWords}{List of characters. Custom autocompletion trigger words}
+
+\item{triggerCaseInsensitive}{Logical. Custom autocompletion trigger word case insensitive}
 
 \item{enableSnippets}{Logical. Enable snippets}
 

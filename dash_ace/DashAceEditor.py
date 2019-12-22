@@ -14,7 +14,7 @@ Keyword arguments:
 - className (string; optional): Often used with CSS to style elements with common properties.
 - placeholder (string; default 'Type code here ...'): Placeholder text to be displayed when editor is empty
 - mode (string; default 'python'): Language for parsing and code highlighting
-- theme (string; default 'monokai'): Theme to use
+- theme (string; default 'github'): Theme to use
 - fontSize (number; default 14): Font size
 - focus (boolean; default False): Focus
 - showGutter (boolean; default True): Show gutter

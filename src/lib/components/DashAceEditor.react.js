@@ -127,7 +127,7 @@ DashAceEditor.defaultProps = {
     id: 'ace-editor',
     placeholder: 'Type code here ...',
     mode: 'python',
-    theme: 'monokai',
+    theme: 'github',
     value: '',
     fontSize: 14,
     focus: false,

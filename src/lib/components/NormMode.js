@@ -1,4 +1,4 @@
-import "ace-builds/src-noconflict/mode-text";
+import "ace-builds/src-noconflict/mode-python";
 
 export class NormHighlightRules extends window.ace.acequire("ace/mode/text_highlight_rules").TextHighlightRules
 {

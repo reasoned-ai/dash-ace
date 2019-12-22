@@ -12,7 +12,8 @@ class App extends Component {
             mode: 'norm',
             theme: 'tomorrow',
             enableBasicAutocompletion: true,
-            enableLiveAutocompletion: true
+            enableLiveAutocompletion: true,
+            autocompleter: 'http://127.0.0.1:8050/autocompleter?prefix='
         };
         this.setProps = this.setProps.bind(this);
     }

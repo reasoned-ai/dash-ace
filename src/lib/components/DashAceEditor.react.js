@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import AceEditor from "react-ace";
 
-import "ace-builds/src-min-noconflict/ext-language_tools";
+import 'ace-builds/src-min-noconflict/ext-language_tools';
 import 'ace-builds/src-min-noconflict/ext-searchbox';
 import 'ace-builds/src-min-noconflict/ext-spellcheck';
 
@@ -26,6 +26,27 @@ export default class DashAceEditor extends Component {
     componentDidMount() {
         if (this.props.mode === 'norm') {
             this.refs.aceEditor.editor.getSession().setMode(new NormMode());
+        }
+        const autocompleter = this.props.autocompleter;
+        if (autocompleter) {
+            const langTools = window.ace.acequire("ace/ext/language_tools");
+            const rhymeCompleter = {
+                getCompletions: function(editor, session, pos, prefix, callback) {
+                    if (prefix.length === 0) {
+                        callback(null, []);
+                        return
+                    }
+                    fetch(autocompleter + prefix)
+                        .then(response => response.json())
+                        .then(wordList => {
+                            callback(null, wordList);
+                        })
+                        .catch((error) => {
+                            console.error(error)
+                        })
+                }
+            };
+            langTools.addCompleter(rhymeCompleter);
         }
     }
 
@@ -184,6 +205,11 @@ DashAceEditor.propTypes = {
      * Enable live autocompletion
      */
     enableLiveAutocompletion: PropTypes.bool,
+
+    /**
+     * Custom autocompletion endpoint
+     */
+    autocompleter: PropTypes.string,
 
     /**
      * Enable snippets

@@ -96,11 +96,11 @@ have the schema of `name: str, value: str, score: int, meta: str`. The popup men
 recommended words by the `score`. The one with the highest `score` lists at the top.
 
 
-Ace editor autocompletion by default takes the current word as the prefix, set `prefixLine=True` allows the custom auto completer
-to receive the whole line before the cursor as the prefix. Note that ace editor does not invoke live auto completion for anything
+Ace editor autocompletion by default takes the current word as the prefix. Setting `prefixLine=True` allows the custom auto completer
+to receive the entire line before the cursor as the prefix. Note that ace editor does not invoke live auto completion for anything
 other than words. Press `Ctrl+Space` to show the recommended completions to access members like `test.` or to define types like `test:`.
 
-Hitting the language server for every key press can overload the server. Setting `triggerWords` to explicitly invoking custom auto completion
+Hitting the language server for every key press can overload the server. Setting `triggerWords` to explicitly invoke custom auto completion
 is highly recommended. Note that symbols need to be escaped, e.g., `\\.`, because these words will be used to compose a regex directly. 
 See javascript regex for more details.
 

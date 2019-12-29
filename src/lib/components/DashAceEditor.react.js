@@ -91,7 +91,7 @@ export default class DashAceEditor extends Component {
                 mode={mode==='norm'?'text':mode}
                 theme={theme}
                 value={value}
-				className={classnames('container__editor', className)}
+				        className={classnames('container__editor', className)}
                 onChange={code => setProps({ value: code })}
                 onLoad={editor => this.customize(editor)}
                 name={id}

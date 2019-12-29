@@ -19,7 +19,7 @@ export class NormHighlightRules extends window.ace.acequire("ace/mode/text_highl
           "enumerate|range|" +
           "pow|sum|abs|max|min|argmax|argmin|len|mean|std|median|" +
           "String|Integer|Bool|Float|Image|UUID|Time|DateTime|" +
-          "type|parameter|atomic|final|primary|optional|id|time|asc|desc|"
+          "type|parameter|atomic|primary|optional|id|time|asc|desc|"
       );
 
       const keywordMapper = this.createKeywordMapper({

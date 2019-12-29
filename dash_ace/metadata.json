@@ -99,7 +99,7 @@
         "required": false,
         "description": "Custom language syntax keywords",
         "defaultValue": {
-          "value": "{\n    \"variable.language\": \"this|super|self|\",\n    \"support.function\": \"enumerate|range|pow|sum|abs|max|min|argmax|argmin|len|mean|std|median|all|any|\",\n    \"support.type\": \"str|int|bool|float|type|\",\n    \"constant.language\": \"True|False|none|\",\n    \"comment.line\": \"#\",\n    \"keyword.operator\": \"and|or|not|in|\",\n    \"keyword.control\": \"as|from|to|import|export|return|for|with|\"\n}",
+          "value": "{\n    \"variable.language\": \"this|super|self|\",\n    \"support.function\": \"enumerate|range|pow|sum|abs|max|min|argmax|argmin|len|mean|std|median|all|any|\",\n    \"support.type\": \"str|int|bool|float|type|\",\n    \"constant.language\": \"True|False|none|\",\n    \"comment.line\": \"#\",\n    \"keyword.operator\": \"and|or|not|in|\",\n    \"keyword.control\": \"def|as|from|to|import|export|return|for|with|try|catch|except|\"\n}",
           "computed": false
         }
       },

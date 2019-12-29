@@ -21,7 +21,7 @@ Keyword arguments:
     "constant.language": "True|False|none|",
     "comment.line": "#",
     "keyword.operator": "and|or|not|in|",
-    "keyword.control": "as|from|to|import|export|return|for|with|"
+    "keyword.control": "def|as|from|to|import|export|return|for|with|try|catch|except|"
 }): Custom language syntax keywords
 - syntaxFolds (string; optional): Custom language syntax folding characters
 - theme (string; default 'github'): Theme to use

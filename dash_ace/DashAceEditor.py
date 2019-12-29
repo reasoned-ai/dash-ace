@@ -14,6 +14,16 @@ Keyword arguments:
 - className (string; optional): Often used with CSS to style elements with common properties.
 - placeholder (string; default 'Type code here ...'): Placeholder text to be displayed when editor is empty
 - mode (string; default 'python'): Language for parsing and code highlighting
+- syntaxKeywords (dict; default {
+    "variable.language": "this|super|self|",
+    "support.function": "enumerate|range|pow|sum|abs|max|min|argmax|argmin|len|mean|std|median|all|any|",
+    "support.type": "str|int|bool|float|type|",
+    "constant.language": "True|False|none|",
+    "comment.line": "#",
+    "keyword.operator": "and|or|not|in|",
+    "keyword.control": "as|from|to|import|export|return|for|with|"
+}): Custom language syntax keywords
+- syntaxFolds (string; optional): Custom language syntax folding characters
 - theme (string; default 'github'): Theme to use
 - fontSize (number; default 14): Font size
 - focus (boolean; default False): Focus
@@ -42,12 +52,12 @@ Keyword arguments:
 - markers (list; optional): Markers to show in the editor
 - style (dict; optional): camelCased properties"""
     @_explicitize_args
-    def __init__(self, id=Component.UNDEFINED, value=Component.UNDEFINED, className=Component.UNDEFINED, placeholder=Component.UNDEFINED, mode=Component.UNDEFINED, theme=Component.UNDEFINED, fontSize=Component.UNDEFINED, focus=Component.UNDEFINED, showGutter=Component.UNDEFINED, showPrintMargin=Component.UNDEFINED, highlightActiveLine=Component.UNDEFINED, cursorStart=Component.UNDEFINED, wrapEnabled=Component.UNDEFINED, readOnly=Component.UNDEFINED, minLines=Component.UNDEFINED, maxLines=Component.UNDEFINED, enableBasicAutocompletion=Component.UNDEFINED, enableLiveAutocompletion=Component.UNDEFINED, autocompleter=Component.UNDEFINED, prefixLine=Component.UNDEFINED, triggerWords=Component.UNDEFINED, triggerCaseInsensitive=Component.UNDEFINED, enableSnippets=Component.UNDEFINED, tabSize=Component.UNDEFINED, debounceChangePeriod=Component.UNDEFINED, editorProps=Component.UNDEFINED, setOptions=Component.UNDEFINED, keyboardHandler=Component.UNDEFINED, commands=Component.UNDEFINED, annotations=Component.UNDEFINED, markers=Component.UNDEFINED, style=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['id', 'value', 'className', 'placeholder', 'mode', 'theme', 'fontSize', 'focus', 'showGutter', 'showPrintMargin', 'highlightActiveLine', 'cursorStart', 'wrapEnabled', 'readOnly', 'minLines', 'maxLines', 'enableBasicAutocompletion', 'enableLiveAutocompletion', 'autocompleter', 'prefixLine', 'triggerWords', 'triggerCaseInsensitive', 'enableSnippets', 'tabSize', 'debounceChangePeriod', 'editorProps', 'setOptions', 'keyboardHandler', 'commands', 'annotations', 'markers', 'style']
+    def __init__(self, id=Component.UNDEFINED, value=Component.UNDEFINED, className=Component.UNDEFINED, placeholder=Component.UNDEFINED, mode=Component.UNDEFINED, syntaxKeywords=Component.UNDEFINED, syntaxFolds=Component.UNDEFINED, theme=Component.UNDEFINED, fontSize=Component.UNDEFINED, focus=Component.UNDEFINED, showGutter=Component.UNDEFINED, showPrintMargin=Component.UNDEFINED, highlightActiveLine=Component.UNDEFINED, cursorStart=Component.UNDEFINED, wrapEnabled=Component.UNDEFINED, readOnly=Component.UNDEFINED, minLines=Component.UNDEFINED, maxLines=Component.UNDEFINED, enableBasicAutocompletion=Component.UNDEFINED, enableLiveAutocompletion=Component.UNDEFINED, autocompleter=Component.UNDEFINED, prefixLine=Component.UNDEFINED, triggerWords=Component.UNDEFINED, triggerCaseInsensitive=Component.UNDEFINED, enableSnippets=Component.UNDEFINED, tabSize=Component.UNDEFINED, debounceChangePeriod=Component.UNDEFINED, editorProps=Component.UNDEFINED, setOptions=Component.UNDEFINED, keyboardHandler=Component.UNDEFINED, commands=Component.UNDEFINED, annotations=Component.UNDEFINED, markers=Component.UNDEFINED, style=Component.UNDEFINED, **kwargs):
+        self._prop_names = ['id', 'value', 'className', 'placeholder', 'mode', 'syntaxKeywords', 'syntaxFolds', 'theme', 'fontSize', 'focus', 'showGutter', 'showPrintMargin', 'highlightActiveLine', 'cursorStart', 'wrapEnabled', 'readOnly', 'minLines', 'maxLines', 'enableBasicAutocompletion', 'enableLiveAutocompletion', 'autocompleter', 'prefixLine', 'triggerWords', 'triggerCaseInsensitive', 'enableSnippets', 'tabSize', 'debounceChangePeriod', 'editorProps', 'setOptions', 'keyboardHandler', 'commands', 'annotations', 'markers', 'style']
         self._type = 'DashAceEditor'
         self._namespace = 'dash_ace'
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['id', 'value', 'className', 'placeholder', 'mode', 'theme', 'fontSize', 'focus', 'showGutter', 'showPrintMargin', 'highlightActiveLine', 'cursorStart', 'wrapEnabled', 'readOnly', 'minLines', 'maxLines', 'enableBasicAutocompletion', 'enableLiveAutocompletion', 'autocompleter', 'prefixLine', 'triggerWords', 'triggerCaseInsensitive', 'enableSnippets', 'tabSize', 'debounceChangePeriod', 'editorProps', 'setOptions', 'keyboardHandler', 'commands', 'annotations', 'markers', 'style']
+        self.available_properties = ['id', 'value', 'className', 'placeholder', 'mode', 'syntaxKeywords', 'syntaxFolds', 'theme', 'fontSize', 'focus', 'showGutter', 'showPrintMargin', 'highlightActiveLine', 'cursorStart', 'wrapEnabled', 'readOnly', 'minLines', 'maxLines', 'enableBasicAutocompletion', 'enableLiveAutocompletion', 'autocompleter', 'prefixLine', 'triggerWords', 'triggerCaseInsensitive', 'enableSnippets', 'tabSize', 'debounceChangePeriod', 'editorProps', 'setOptions', 'keyboardHandler', 'commands', 'annotations', 'markers', 'style']
         self.available_wildcard_properties =            []
 
         _explicit_args = kwargs.pop('_explicit_args')

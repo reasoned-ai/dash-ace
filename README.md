@@ -59,7 +59,9 @@ if __name__ == '__main__':
 | ------------------------- | ------------ | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | id                        | 'ace-editor' | str   | Unique Id to be used for the editor                                                                                                                                                                                                                                                 |
 | placeholder               | 'Type code here ...'| str   | Placeholder text to be displayed when editor is empty                                                                                                                                                                                                                               |
-| mode                      | 'python'     | str   | Language for parsing and code highlighting                                                                                                                                                                                                                                          |
+| mode                      | 'python'     | str   | Language for parsing and code highlighting
+| syntaxKeywords            | {}           | dict  | Custom language keywords, see [format](https://github.com/ajaxorg/ace/wiki/Creating-or-Extending-an-Edit-Mode#common-tokens)
+| syntaxFolds               | None         | str   | Custom language folding character to fold code
 | theme                     | 'github'     | str   | theme to use                                                                                                                                                                                                                                                                        |
 | value                     | ''           | str   | value you want to populate in the code highlighter                                                                                                                                                                                                                                  |
 | className                 | None         | str   | custom className                                                                                                                                                                                                                                                                    |
@@ -88,17 +90,37 @@ if __name__ == '__main__':
 | markers                   | None         | list    | [markers](https://ace.c9.io/#nav=api&api=edit_session) to show in the editor, i.e. `[{ startRow: 0, startCol: 2, endRow: 1, endCol: 20, className: 'error-marker', type: 'background' }]`. Make sure to define the class (eg. ".error-marker") and set `position: absolute` for it. |
 | style                     | None         | dict   | camelCased properties                                                                                                                            Get started with:
 
+## Custom Language
+Dash ace editor has a simple mechanism to create a custom mode that extends from python language. The syntax highlighting allows
+custom keywords to be defined in `syntaxKeywords`. Additional folding characters can be defined in `syntaxFolds`. 
+The following is a custom syntax configuration for [Norm](https://github.com/reasoned-ai/norm).
+
+```python
+    syntaxKeywords = {
+        "variable.language": "this|that|super|self|sub|",
+        "support.function": "enumerate|range|pow|sum|abs|max|min|argmax|argmin|len|mean|std|median|all|any|",
+        "support.type": "String|Integer|Bool|Float|Image|UUID|Time|DateTime|Type|",
+        "storage.modifier": "parameter|atomic|primary|optional|id|time|asc|desc|",
+        "constant.language": "true|false|none|na|",
+        "keyword.operator": "and|or|not|except|unless|imply|in|",
+        "keyword.control": "as|from|to|import|export|return|for|exist|with|"
+    }
+    
+    syntaxFolds = '\\:='
+```
+
+The syntax rules can be created and tested on [Mode Creator](https://ace.c9.io/tool/mode_creator.html). 
+    
 
 ## Custom Auto Completer
 A language server can provide a better intellisense service to recommend the most relevant keywords, types and variables.
-`autocompleter='/autocompleter?prefix='` configures the editor to consult the API with prefix. The returned list of recommended words
-have the schema of `name: str, value: str, score: int, meta: str`. The popup menu in UI shows `value` and `meta` and order the 
+`autocompleter='/autocompleter?prefix='` configures the editor to consult the API given a prefix. The returned list of recommended words
+has the schema of `name: str, value: str, score: int, meta: str`. The popup menu in UI shows `value` and `meta` and order the 
 recommended words by the `score`. The one with the highest `score` lists at the top.
 
-
-Ace editor autocompletion by default takes the current word as the prefix. Setting `prefixLine=True` allows the custom auto completer
+Ace editor autocompletion by default takes the word at the cursor as the prefix. Setting `prefixLine=True` allows the custom auto completer
 to receive the entire line before the cursor as the prefix. Note that ace editor does not invoke live auto completion for anything
-other than words. Press `Ctrl+Space` to show the recommended completions to access members like `test.` or to define types like `test:`.
+other than words. Press `Ctrl+Space` to show the recommended completions if you would like to access members like `test.` or to declare types like `test:`.
 
 Hitting the language server for every key press can overload the server. Setting `triggerWords` to explicitly invoke custom auto completion
 is highly recommended. Note that symbols need to be escaped, e.g., `\\.`, because these words will be used to compose a regex directly. 
@@ -113,6 +135,8 @@ The following is a complete example:
               '    return f"value is {a}"',
         theme='github',
         mode='norm',
+        syntaxKeywords=syntaxKeywords,
+        syntaxFolds=syntaxFolds,
         tabSize=2,
         enableBasicAutocompletion=True,
         enableLiveAutocompletion=True,
@@ -123,16 +147,8 @@ The following is a complete example:
     ),
 ``` 
 
-## Custom Mode
-Ace editor has a simple mechanism to create a custom mode. This component ships with a [Norm language](https://github.com/reasoned-ai/norm) 
-that is designed for interactive probabilistic logic programming. If you want to create your own custom mode, it is recommended to modify
-the [code](https://github.com/reasoned-ai/dash-ace/blob/master/src/lib/components/NormMode.js) directly. 
-
-The syntax rules can be created and tested on [Mode Creator](https://ace.c9.io/tool/mode_creator.html). Remember to modify the folding 
-patterns to reflect the correct folding.
-    
 ## TODO
-1. Support a general custom mode that allow rules to pass in as a json dictionary
+1. Support custom modes extended from javascript
 2. Support dynamic loading of modes and themes
 3. Support code analysis customizations to indicate errors and suggest changes
 

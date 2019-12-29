@@ -10,13 +10,14 @@ Dash component wraps up react-ace editor https://github.com/securingsincity/reac
 }
 
 \usage{
-dashAceEditor(id=NULL, value=NULL, className=NULL, placeholder=NULL, mode=NULL, theme=NULL,
-fontSize=NULL, focus=NULL, showGutter=NULL, showPrintMargin=NULL,
-highlightActiveLine=NULL, cursorStart=NULL, wrapEnabled=NULL, readOnly=NULL,
-minLines=NULL, maxLines=NULL, enableBasicAutocompletion=NULL,
-enableLiveAutocompletion=NULL, autocompleter=NULL, prefixLine=NULL,
-triggerWords=NULL, triggerCaseInsensitive=NULL, enableSnippets=NULL,
-tabSize=NULL, debounceChangePeriod=NULL, editorProps=NULL, setOptions=NULL,
+dashAceEditor(id=NULL, value=NULL, className=NULL, placeholder=NULL, mode=NULL,
+syntaxKeywords=NULL, syntaxFolds=NULL, theme=NULL, fontSize=NULL, focus=NULL,
+showGutter=NULL, showPrintMargin=NULL, highlightActiveLine=NULL,
+cursorStart=NULL, wrapEnabled=NULL, readOnly=NULL, minLines=NULL, maxLines=NULL,
+enableBasicAutocompletion=NULL, enableLiveAutocompletion=NULL,
+autocompleter=NULL, prefixLine=NULL, triggerWords=NULL,
+triggerCaseInsensitive=NULL, enableSnippets=NULL, tabSize=NULL,
+debounceChangePeriod=NULL, editorProps=NULL, setOptions=NULL,
 keyboardHandler=NULL, commands=NULL, annotations=NULL, markers=NULL, style=NULL)
 }
 
@@ -30,6 +31,10 @@ keyboardHandler=NULL, commands=NULL, annotations=NULL, markers=NULL, style=NULL)
 \item{placeholder}{Character. Placeholder text to be displayed when editor is empty}
 
 \item{mode}{Character. Language for parsing and code highlighting}
+
+\item{syntaxKeywords}{Named list. Custom language syntax keywords}
+
+\item{syntaxFolds}{Character. Custom language syntax folding characters}
 
 \item{theme}{Character. Theme to use}
 

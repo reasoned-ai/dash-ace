@@ -9,13 +9,10 @@ class App extends Component {
         super();
         this.state = {
             value: '',
-            mode: 'norm',
+            mode: 'custom',
             theme: 'tomorrow',
             enableBasicAutocompletion: true,
             enableLiveAutocompletion: true,
-            autocompleter: 'http://127.0.0.1:8050/autocompleter?prefix=',
-            prefixLine: true,
-            triggerWords: [':', '\\.', '::']
         };
         this.setProps = this.setProps.bind(this);
     }

@@ -15,7 +15,7 @@ import "ace-builds/src-min-noconflict/theme-tomorrow";
 import "ace-builds/src-min-noconflict/theme-twilight";
 import "ace-builds/src-min-noconflict/theme-textmate";
 
-import NormMode from "./NormMode";
+import CustomMode from "./CustomPythonMode";
 
 /**
  * Dash component wraps up react-ace editor
@@ -24,11 +24,11 @@ import NormMode from "./NormMode";
 export default class DashAceEditor extends Component {
 
     customize(editor) {
-        if (this.props.mode === 'norm') {
-            editor.getSession().setMode(new NormMode());
-        }
+        const {autocompleter, prefixLine, triggerWords, triggerCaseInsensitive, syntaxKeywords, syntaxFolds} = this.props;
 
-        const {autocompleter, prefixLine, triggerWords, triggerCaseInsensitive} = this.props;
+        if (this.props.mode !== 'python' && this.props.mode !== 'javascript' && this.props.mode !== 'sql') {
+            editor.getSession().setMode(new CustomMode(syntaxKeywords, syntaxFolds));
+        }
 
         if (autocompleter) {
             const langTools = window.ace.acequire("ace/ext/language_tools");
@@ -88,7 +88,7 @@ export default class DashAceEditor extends Component {
         return (
             <AceEditor
                 ref="aceEditor"
-                mode={mode==='norm'?'text':mode}
+                mode={(mode !== 'python' && mode !== 'javascript' && mode !== 'sql')? 'python': mode}
                 theme={theme}
                 value={value}
 				        className={classnames('container__editor', className)}
@@ -127,6 +127,15 @@ DashAceEditor.defaultProps = {
     id: 'ace-editor',
     placeholder: 'Type code here ...',
     mode: 'python',
+    syntaxKeywords: {
+        "variable.language": "this|super|self|",
+        "support.function": "enumerate|range|pow|sum|abs|max|min|argmax|argmin|len|mean|std|median|all|any|",
+        "support.type": "str|int|bool|float|type|",
+        "constant.language": "True|False|none|",
+        "comment.line": "#",
+        "keyword.operator": "and|or|not|in|",
+        "keyword.control": "def|as|from|to|import|export|return|for|with|try|catch|except|"
+    },
     theme: 'github',
     value: '',
     fontSize: 14,
@@ -171,6 +180,16 @@ DashAceEditor.propTypes = {
      * Language for parsing and code highlighting
      */
     mode: PropTypes.string,
+
+    /**
+     * Custom language syntax keywords
+     */
+    syntaxKeywords: PropTypes.object,
+
+    /**
+     * Custom language syntax folding characters
+     */
+    syntaxFolds: PropTypes.string,
 
     /**
      * Theme to use

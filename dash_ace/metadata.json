@@ -366,6 +366,39 @@
         "required": false,
         "description": "camelCased properties"
       },
+      "width": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "width, CSS style, e.g., '500px'",
+        "defaultValue": {
+          "value": "'500px'",
+          "computed": false
+        }
+      },
+      "height": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "height, CSS style, e.g., '500px'",
+        "defaultValue": {
+          "value": "'500px'",
+          "computed": false
+        }
+      },
+      "orientation": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "orientation of the diff editor, 'beside' or 'below'",
+        "defaultValue": {
+          "value": "'beside'",
+          "computed": false
+        }
+      },
       "setProps": {
         "type": {
           "name": "func"

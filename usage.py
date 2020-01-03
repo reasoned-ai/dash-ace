@@ -2,7 +2,6 @@ import dash
 import dash_ace
 import dash_html_components as html
 import flask
-import logging
 from flask import request, jsonify
 from flask_cors import CORS
 

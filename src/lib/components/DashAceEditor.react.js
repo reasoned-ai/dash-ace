@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import AceEditor from "react-ace";
+import {diff as DiffEditor, AceEditor} from "react-ace";
 
 import 'ace-builds/src-min-noconflict/ext-language_tools';
 import 'ace-builds/src-min-noconflict/ext-searchbox';
@@ -58,18 +58,20 @@ export default class DashAceEditor extends Component {
     increaseFontSize(ref) {
         const currentFontSize = ref.aceEditor.editor.getFontSize();
         ref.aceEditor.editor.setFontSize(currentFontSize + 1);
+        this.setProps({fontSize: currentFontSize + 1});
     }
 
     decreaseFontSize(ref) {
         const currentFontSize = ref.aceEditor.editor.getFontSize();
         ref.aceEditor.editor.setFontSize(currentFontSize - 1);
+        this.setProps({fontSize: currentFontSize - 1});
     }
 
     render() {
         const {id, mode, theme, className, value, focus, placeholder, fontSize, showGutter, showPrintMargin,
-            highlightActiveLine, cursorStart, wrapEnabled, readOnly, minLines, maxLines,
+            highlightActiveLine, cursorStart, wrapEnabled, readOnly, minLines, maxLines, width, height,
             enableBasicAutocompletion, enableLiveAutocompletion, enableSnippets, tabSize, debounceChangePeriod,
-            editorProps, setOptions, keyboardHandler, commands, annotations, markers, style,
+            editorProps, setOptions, keyboardHandler, commands, annotations, markers, style, orientation,
             setProps} = this.props;
 
         const fontAdjust = [
@@ -84,6 +86,41 @@ export default class DashAceEditor extends Component {
                 exec: () => { this.decreaseFontSize(this.refs) }
             }
         ];
+
+        if (typeof(value) === 'object' && value.length > 1) {
+            return (
+                <DiffEditor
+                    ref="aceEditor"
+                    mode={(mode !== 'python' && mode !== 'javascript' && mode !== 'sql')? 'python': mode}
+                    theme={theme}
+                    value={value}
+                    className={classnames('container__editor', className)}
+                    onChange={code => setProps({ value: code })}
+                    onLoad={editor => this.customize(editor)}
+                    name={id}
+                    fontSize={fontSize}
+                    focus={focus}
+                    orientation={orientation}
+                    showGutter={showGutter}
+                    showPrintMargin={showPrintMargin}
+                    highlightActiveLine={highlightActiveLine}
+                    cursorStart={cursorStart}
+                    wrapEnabled={wrapEnabled}
+                    readOnly={readOnly}
+                    minLines={minLines}
+                    maxLines={maxLines}
+                    width={width}
+                    height={height}
+                    enableBasicAutocompletion={enableBasicAutocompletion}
+                    enableLiveAutocompletion={enableLiveAutocompletion}
+                    enableSnippets={enableSnippets}
+                    tabSize={tabSize}
+                    editorProps={editorProps}
+                    setOptions={setOptions}
+                    style={style}
+                />
+            );
+        }
 
         return (
             <AceEditor
@@ -106,6 +143,8 @@ export default class DashAceEditor extends Component {
                 readOnly={readOnly}
                 minLines={minLines}
                 maxLines={maxLines}
+                width={width}
+                height={height}
                 enableBasicAutocompletion={enableBasicAutocompletion}
                 enableLiveAutocompletion={enableLiveAutocompletion}
                 enableSnippets={enableSnippets}
@@ -152,6 +191,9 @@ DashAceEditor.defaultProps = {
     tabSize: 4,
     prefixLine: false,
     triggerCaseInsensitive: true,
+    width: '500px',
+    height: '500px',
+    orientation: 'beside',
     editorProps: { $blockScrolling: true }
 };
 
@@ -325,6 +367,21 @@ DashAceEditor.propTypes = {
      * camelCased properties
      */
     style: PropTypes.object,
+
+    /**
+     * width, CSS style, e.g., '500px'
+     */
+    width: PropTypes.string,
+
+    /**
+     * height, CSS style, e.g., '500px'
+     */
+    height: PropTypes.string,
+
+    /**
+     * orientation of the diff editor, 'beside' or 'below'
+     */
+    orientation: PropTypes.string,
 
     /**
      * Dash-assigned callback that should be called to report property changes

@@ -18,7 +18,8 @@ enableBasicAutocompletion=NULL, enableLiveAutocompletion=NULL,
 autocompleter=NULL, prefixLine=NULL, triggerWords=NULL,
 triggerCaseInsensitive=NULL, enableSnippets=NULL, tabSize=NULL,
 debounceChangePeriod=NULL, editorProps=NULL, setOptions=NULL,
-keyboardHandler=NULL, commands=NULL, annotations=NULL, markers=NULL, style=NULL)
+keyboardHandler=NULL, commands=NULL, annotations=NULL, markers=NULL, style=NULL,
+width=NULL, height=NULL, orientation=NULL)
 }
 
 \arguments{
@@ -89,4 +90,10 @@ keyboardHandler=NULL, commands=NULL, annotations=NULL, markers=NULL, style=NULL)
 \item{markers}{Unnamed list. Markers to show in the editor}
 
 \item{style}{Named list. camelCased properties}
+
+\item{width}{Character. width, CSS style, e.g., '500px'}
+
+\item{height}{Character. height, CSS style, e.g., '500px'}
+
+\item{orientation}{Character. orientation of the diff editor, 'beside' or 'below'}
 }

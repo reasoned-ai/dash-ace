@@ -5,12 +5,12 @@ import { DashAceEditor } from '../lib';
 
 class App extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            value: '',
-            mode: 'custom',
-            theme: 'tomorrow',
+            value: ['# test this example', '# test that example'],
+            mode: 'python',
+            theme: 'github',
             enableBasicAutocompletion: true,
             enableLiveAutocompletion: true,
         };

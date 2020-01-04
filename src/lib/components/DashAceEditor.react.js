@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import {diff as DiffEditor, AceEditor} from "react-ace";
+import AceEditor, { diff as DiffEditor } from "react-ace";
 
 import 'ace-builds/src-min-noconflict/ext-language_tools';
 import 'ace-builds/src-min-noconflict/ext-searchbox';
@@ -16,12 +16,18 @@ import "ace-builds/src-min-noconflict/theme-twilight";
 import "ace-builds/src-min-noconflict/theme-textmate";
 
 import CustomMode from "./CustomPythonMode";
+import './diff_editor.css';
 
 /**
  * Dash component wraps up react-ace editor
  * https://github.com/securingsincity/react-ace
  */
 export default class DashAceEditor extends Component {
+
+    customizeSplit(split) {
+        this.customize(split.getEditor(0));
+        this.customize(split.getEditor(1));
+    }
 
     customize(editor) {
         const {autocompleter, prefixLine, triggerWords, triggerCaseInsensitive, syntaxKeywords, syntaxFolds} = this.props;
@@ -55,16 +61,16 @@ export default class DashAceEditor extends Component {
         }
     }
 
-    increaseFontSize(ref) {
-        const currentFontSize = ref.aceEditor.editor.getFontSize();
-        ref.aceEditor.editor.setFontSize(currentFontSize + 1);
-        this.setProps({fontSize: currentFontSize + 1});
+    increaseFontSize(editor, setFontSize) {
+        const currentFontSize = editor.getFontSize();
+        editor.setFontSize(currentFontSize + 2);
+        setFontSize(currentFontSize + 2);
     }
 
-    decreaseFontSize(ref) {
-        const currentFontSize = ref.aceEditor.editor.getFontSize();
-        ref.aceEditor.editor.setFontSize(currentFontSize - 1);
-        this.setProps({fontSize: currentFontSize - 1});
+    decreaseFontSize(editor, setFontSize) {
+        const currentFontSize = editor.getFontSize();
+        editor.setFontSize(currentFontSize - 2);
+        setFontSize(currentFontSize - 2);
     }
 
     render() {
@@ -78,12 +84,12 @@ export default class DashAceEditor extends Component {
             {
                 name: 'increaseFontSize',
                 bindKey: {win: 'Ctrl-=', mac: 'Command-='},
-                exec: () => { this.increaseFontSize(this.refs) }
+                exec: () => { this.increaseFontSize(this.refs.aceEditor.editor, fz => setProps({fontSize: fz})) }
             },
             {
                 name: 'decreaseFontSize',
                 bindKey: {win: 'Ctrl--', mac: 'Command--'},
-                exec: () => { this.decreaseFontSize(this.refs) }
+                exec: () => { this.decreaseFontSize(this.refs.aceEditor.editor, fz => setProps({fontSize: fz})) }
             }
         ];
 
@@ -96,7 +102,7 @@ export default class DashAceEditor extends Component {
                     value={value}
                     className={classnames('container__editor', className)}
                     onChange={code => setProps({ value: code })}
-                    onLoad={editor => this.customize(editor)}
+                    onLoad={split => this.customizeSplit(split)}
                     name={id}
                     fontSize={fontSize}
                     focus={focus}
@@ -191,9 +197,9 @@ DashAceEditor.defaultProps = {
     tabSize: 4,
     prefixLine: false,
     triggerCaseInsensitive: true,
-    width: '500px',
-    height: '500px',
-    orientation: 'beside',
+    width: '1000px',
+    height: '1000px',
+    orientation: 'below',
     editorProps: { $blockScrolling: true }
 };
 
@@ -206,7 +212,7 @@ DashAceEditor.propTypes = {
     /**
      * The value displayed in the input.
      */
-    value: PropTypes.string,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
 
     /**
      * Often used with CSS to style elements with common properties.
@@ -369,12 +375,12 @@ DashAceEditor.propTypes = {
     style: PropTypes.object,
 
     /**
-     * width, CSS style, e.g., '500px'
+     * width, CSS style, e.g., '1000px'
      */
     width: PropTypes.string,
 
     /**
-     * height, CSS style, e.g., '500px'
+     * height, CSS style, e.g., '1000px'
      */
     height: PropTypes.string,
 

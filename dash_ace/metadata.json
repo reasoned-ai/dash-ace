@@ -4,6 +4,18 @@
     "displayName": "DashAceEditor",
     "methods": [
       {
+        "name": "customizeSplit",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "split",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
         "name": "customize",
         "docblock": null,
         "modifiers": [],
@@ -21,7 +33,11 @@
         "modifiers": [],
         "params": [
           {
-            "name": "ref",
+            "name": "editor",
+            "type": null
+          },
+          {
+            "name": "setFontSize",
             "type": null
           }
         ],
@@ -33,7 +49,11 @@
         "modifiers": [],
         "params": [
           {
-            "name": "ref",
+            "name": "editor",
+            "type": null
+          },
+          {
+            "name": "setFontSize",
             "type": null
           }
         ],
@@ -54,7 +74,18 @@
       },
       "value": {
         "type": {
-          "name": "string"
+          "name": "union",
+          "value": [
+            {
+              "name": "string"
+            },
+            {
+              "name": "arrayOf",
+              "value": {
+                "name": "string"
+              }
+            }
+          ]
         },
         "required": false,
         "description": "The value displayed in the input.",
@@ -371,9 +402,9 @@
           "name": "string"
         },
         "required": false,
-        "description": "width, CSS style, e.g., '500px'",
+        "description": "width, CSS style, e.g., '1000px'",
         "defaultValue": {
-          "value": "'500px'",
+          "value": "'1000px'",
           "computed": false
         }
       },
@@ -382,9 +413,9 @@
           "name": "string"
         },
         "required": false,
-        "description": "height, CSS style, e.g., '500px'",
+        "description": "height, CSS style, e.g., '1000px'",
         "defaultValue": {
-          "value": "'500px'",
+          "value": "'1000px'",
           "computed": false
         }
       },
@@ -395,7 +426,7 @@
         "required": false,
         "description": "orientation of the diff editor, 'beside' or 'below'",
         "defaultValue": {
-          "value": "'beside'",
+          "value": "'below'",
           "computed": false
         }
       },

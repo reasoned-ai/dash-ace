@@ -28,8 +28,8 @@ syntaxFolds = "\\:="
 app.layout = html.Div([
     dash_ace.DashAceEditor(
         id='input',
-        value='test(a: Integer) -> String := \n'
-              '    return f"value is {a}"',
+        value=['test(a: Integer) -> String := \n    return f"value is {a}"',
+               'test(a: Integer) -> String := return f"value is {a}"'],
         theme='github',
         mode='norm',
         tabSize=2,
@@ -40,7 +40,7 @@ app.layout = html.Div([
         autocompleter='/autocompleter?prefix=',
         prefixLine=True,
         triggerWords=[':', '\\.', '::'],
-        placeholder='Norm code ...'
+        placeholder='Norm code ...',
     ),
     html.Div(id='output')
 ])

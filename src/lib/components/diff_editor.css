@@ -1,0 +1,5 @@
+.codeMarker {
+    background: coral;
+    position: absolute;
+    z-index: 20;
+}

@@ -25,7 +25,7 @@ width=NULL, height=NULL, orientation=NULL)
 \arguments{
 \item{id}{Character. The ID used to identify this component in Dash callbacks.}
 
-\item{value}{Character. The value displayed in the input.}
+\item{value}{Character | list of characters. The value displayed in the input.}
 
 \item{className}{Character. Often used with CSS to style elements with common properties.}
 
@@ -91,9 +91,9 @@ width=NULL, height=NULL, orientation=NULL)
 
 \item{style}{Named list. camelCased properties}
 
-\item{width}{Character. width, CSS style, e.g., '500px'}
+\item{width}{Character. width, CSS style, e.g., '1000px'}
 
-\item{height}{Character. height, CSS style, e.g., '500px'}
+\item{height}{Character. height, CSS style, e.g., '1000px'}
 
 \item{orientation}{Character. orientation of the diff editor, 'beside' or 'below'}
 }

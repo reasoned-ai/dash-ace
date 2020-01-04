@@ -1,6 +1,7 @@
 import dash
 import dash_ace
 import dash_html_components as html
+from dash.dependencies import Input, Output
 import flask
 from flask import request, jsonify
 from flask_cors import CORS
@@ -25,11 +26,9 @@ syntaxKeywords = {
 
 syntaxFolds = "\\:="
 
-app.layout = html.Div([
-    dash_ace.DashAceEditor(
-        id='input',
-        value=['test(a: Integer) -> String := \n    return f"value is {a}"',
-               'test(a: Integer) -> String := return f"value is {a}"'],
+ace_editor = dash_ace.DashAceEditor(
+        id='demo-editor',
+        value='test(a: Integer) -> String := \n    return f"value is {a}"',
         theme='github',
         mode='norm',
         tabSize=2,
@@ -41,9 +40,28 @@ app.layout = html.Div([
         prefixLine=True,
         triggerWords=[':', '\\.', '::'],
         placeholder='Norm code ...',
-    ),
+    )
+
+app.layout = html.Div([
+    html.Button('Compare', id='diff-btn'),
+    ace_editor,
     html.Div(id='output')
 ])
+
+
+@app.callback(
+    [Output(component_id='demo-editor', component_property='value'),
+     Output(component_id='diff-btn', component_property='children')],
+    [Input('diff-btn', 'n_clicks')]
+)
+def update_output_editor(n_clicks):
+    if n_clicks is None:
+        n_clicks = 0
+    if n_clicks % 2 == 0:
+        return ['test(a: Integer) -> String := \n    return f"value is {a}"',
+                'test(a: Integer) -> String := return f"value is {a}"'], 'Single'
+    else:
+        return 'test(a: Integer) -> String := \n    return f"value is {a}"', 'Compare'
 
 
 @server.route('/autocompleter', methods=['GET'])

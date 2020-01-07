@@ -63,7 +63,7 @@ if __name__ == '__main__':
 | syntaxKeywords            | {}           | dict  | Custom language keywords, see [format](https://github.com/ajaxorg/ace/wiki/Creating-or-Extending-an-Edit-Mode#common-tokens)
 | syntaxFolds               | None         | str   | Custom language folding character to fold code
 | theme                     | 'github'     | str   | theme to use                                                                                                                                                                                                                                                                        |
-| value                     | ''           | str   | value you want to populate in the code highlighter                                                                                                                                                                                                                                  |
+| value                     | ''           | str or List[str]   | values you want to populate in the code                                                                                                                                                                                                                                   |
 | className                 | None         | str   | custom className                                                                                                                                                                                                                                                                    |
 | fontSize                  | 14           | int   | pixel value for font-size                                                                                                                                                                                                                                                           |
 | showGutter                | True         | bool  | show gutter                                                                                                                                                                                                                                                                         |
@@ -73,6 +73,7 @@ if __name__ == '__main__':
 | cursorStart               | 1            | int   | the location of the cursor                                                                                                                                                                                                                                                          |
 | wrapEnabled               | False        | bool  | Wrapping lines                                                                                                                                                                                                                                                                      |
 | readOnly                  | False        | bool  | make the editor read only                                                                                                                                                                                                                                                           |
+| orientation                  | 'below'   | str   | diff view orientation, 'below' or 'beside'                                                                                                                                                                                                                                             |
 | minLines                  | None         | int   | Minimum number of lines to be displayed                                                                                                                                                                                                                                             |
 | maxLines                  | None         | int   | Maximum number of lines to be displayed                                                                                                                                                                                                                                             |
 | enableBasicAutocompletion | False        | bool  | Enable basic autocompletion                                                                                                                                                                                                                                                         |
@@ -146,6 +147,29 @@ The following is a complete example:
         placeholder='Norm code ...'
     ),
 ``` 
+
+### Diff View
+If the value is provided as an array of two strings, editor splits into two views to show the difference between two pieces of codes.
+```python
+    dash_ace.DashAceEditor(
+        id='input',
+        value=['test(a: Integer) -> String := \n return f"value is {a}"',
+               'test(a: Integer) -> String := return f"valus is not {a}"']
+        theme='github',
+        mode='norm',
+        syntaxKeywords=syntaxKeywords,
+        syntaxFolds=syntaxFolds,
+        tabSize=2,
+        orientation='below',
+        enableBasicAutocompletion=True,
+        enableLiveAutocompletion=True,
+        autocompleter='/autocompleter?prefix=',
+        prefixLine=True,
+        triggerWords=[':', '\\.', '::'], # consult the completer for types, members and inheritances
+        placeholder='Norm code ...'
+    ),
+```
+The property `orientation` sets the comparisons horizontal or vertical.
 
 ## TODO
 1. Support custom modes extended from javascript

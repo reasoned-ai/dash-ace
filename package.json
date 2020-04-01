@@ -1,6 +1,6 @@
 {
     "name": "dash_ace_persistent",
-    "version": "0.2.2",
+    "version": "0.3.0",
     "description": "Dash Ace Editor Component with persistence",
     "repository": {
         "type": "git",

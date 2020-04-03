@@ -9,7 +9,7 @@ import sys
 import importlib
 
 
-components_package = 'dash_ace'
+components_package = 'dash_ace_persistent'
 
 components_lib = importlib.import_module(components_package)
 

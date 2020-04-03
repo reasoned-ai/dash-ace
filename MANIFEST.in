@@ -1,7 +1,7 @@
-include dash_ace/dash_ace.min.js
-include dash_ace/dash_ace.min.js.map
-include dash_ace/metadata.json
-include dash_ace/package-info.json
+include dash_ace_persistent/dash_ace_persistent.min.js
+include dash_ace_persistent/dash_ace_persistent.min.js.map
+include dash_ace_persistent/metadata.json
+include dash_ace_persistent/package-info.json
 include README.md
 include LICENSE
 include package.json

@@ -1,0 +1,505 @@
+{
+  "src/lib/components/DashAceEditor.react.js": {
+    "description": "Dash component wraps up react-ace editor\nhttps://github.com/securingsincity/react-ace",
+    "displayName": "DashAceEditor",
+    "methods": [
+      {
+        "name": "customizeSplit",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "split",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "customize",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "editor",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "increaseFontSize",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "editor",
+            "type": null
+          },
+          {
+            "name": "setFontSize",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "decreaseFontSize",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "editor",
+            "type": null
+          },
+          {
+            "name": "setFontSize",
+            "type": null
+          }
+        ],
+        "returns": null
+      }
+    ],
+    "props": {
+      "id": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "The ID used to identify this component in Dash callbacks.",
+        "defaultValue": {
+          "value": "'ace-editor'",
+          "computed": false
+        }
+      },
+      "value": {
+        "type": {
+          "name": "union",
+          "value": [
+            {
+              "name": "string"
+            },
+            {
+              "name": "arrayOf",
+              "value": {
+                "name": "string"
+              }
+            }
+          ]
+        },
+        "required": false,
+        "description": "The value displayed in the input.",
+        "defaultValue": {
+          "value": "''",
+          "computed": false
+        }
+      },
+      "className": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Often used with CSS to style elements with common properties."
+      },
+      "placeholder": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Placeholder text to be displayed when editor is empty",
+        "defaultValue": {
+          "value": "'Type code here ...'",
+          "computed": false
+        }
+      },
+      "mode": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Language for parsing and code highlighting",
+        "defaultValue": {
+          "value": "'python'",
+          "computed": false
+        }
+      },
+      "syntaxKeywords": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "Custom language syntax keywords",
+        "defaultValue": {
+          "value": "{\n    \"variable.language\": \"this|super|self|\",\n    \"support.function\": \"enumerate|range|pow|sum|abs|max|min|argmax|argmin|len|mean|std|median|all|any|\",\n    \"support.type\": \"str|int|bool|float|type|\",\n    \"constant.language\": \"True|False|none|\",\n    \"comment.line\": \"#\",\n    \"keyword.operator\": \"and|or|not|in|\",\n    \"keyword.control\": \"def|as|from|to|import|export|return|for|with|try|catch|except|\"\n}",
+          "computed": false
+        }
+      },
+      "syntaxFolds": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Custom language syntax folding characters"
+      },
+      "theme": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Theme to use",
+        "defaultValue": {
+          "value": "'github'",
+          "computed": false
+        }
+      },
+      "fontSize": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "Font size",
+        "defaultValue": {
+          "value": "14",
+          "computed": false
+        }
+      },
+      "focus": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "Focus",
+        "defaultValue": {
+          "value": "false",
+          "computed": false
+        }
+      },
+      "showGutter": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "Show gutter",
+        "defaultValue": {
+          "value": "true",
+          "computed": false
+        }
+      },
+      "showPrintMargin": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "Show print margin",
+        "defaultValue": {
+          "value": "true",
+          "computed": false
+        }
+      },
+      "highlightActiveLine": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "Highlight active line",
+        "defaultValue": {
+          "value": "true",
+          "computed": false
+        }
+      },
+      "cursorStart": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "The location of the cursor",
+        "defaultValue": {
+          "value": "1",
+          "computed": false
+        }
+      },
+      "wrapEnabled": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "Wrapping lines",
+        "defaultValue": {
+          "value": "false",
+          "computed": false
+        }
+      },
+      "readOnly": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "Make the editor read only",
+        "defaultValue": {
+          "value": "false",
+          "computed": false
+        }
+      },
+      "minLines": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "Minimum number of lines to be displayed"
+      },
+      "maxLines": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "Maximum number of lines to be displayed"
+      },
+      "enableBasicAutocompletion": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "Enable basic autocompletion",
+        "defaultValue": {
+          "value": "false",
+          "computed": false
+        }
+      },
+      "enableLiveAutocompletion": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "Enable live autocompletion",
+        "defaultValue": {
+          "value": "false",
+          "computed": false
+        }
+      },
+      "autocompleter": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Custom autocompletion endpoint"
+      },
+      "prefixLine": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "Custom autocompletion prefix line or word",
+        "defaultValue": {
+          "value": "false",
+          "computed": false
+        }
+      },
+      "triggerWords": {
+        "type": {
+          "name": "arrayOf",
+          "value": {
+            "name": "string"
+          }
+        },
+        "required": false,
+        "description": "Custom autocompletion trigger words"
+      },
+      "triggerCaseInsensitive": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "Custom autocompletion trigger word case insensitive",
+        "defaultValue": {
+          "value": "true",
+          "computed": false
+        }
+      },
+      "enableSnippets": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "Enable snippets",
+        "defaultValue": {
+          "value": "false",
+          "computed": false
+        }
+      },
+      "tabSize": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "Tab size",
+        "defaultValue": {
+          "value": "4",
+          "computed": false
+        }
+      },
+      "debounceChangePeriod": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "A debounce delay period for the onChange event"
+      },
+      "editorProps": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "Properties to apply directly to the Ace editor instance",
+        "defaultValue": {
+          "value": "{ $blockScrolling: true }",
+          "computed": false
+        }
+      },
+      "setOptions": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "Options to apply directly to the Ace editor instance"
+      },
+      "keyboardHandler": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Key binding mode to set, e.g., vim or emacs"
+      },
+      "commands": {
+        "type": {
+          "name": "array"
+        },
+        "required": false,
+        "description": "New commands to add to the editor"
+      },
+      "annotations": {
+        "type": {
+          "name": "array"
+        },
+        "required": false,
+        "description": "Annotations to show in the editor, i.e., [{row:0, column:2, type:'error', text: 'some error'}"
+      },
+      "markers": {
+        "type": {
+          "name": "array"
+        },
+        "required": false,
+        "description": "Markers to show in the editor"
+      },
+      "style": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "camelCased properties"
+      },
+      "width": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "width, CSS style, e.g., '1000px'",
+        "defaultValue": {
+          "value": "'1000px'",
+          "computed": false
+        }
+      },
+      "height": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "height, CSS style, e.g., '1000px'",
+        "defaultValue": {
+          "value": "'1000px'",
+          "computed": false
+        }
+      },
+      "orientation": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "orientation of the diff editor, 'beside' or 'below'",
+        "defaultValue": {
+          "value": "'below'",
+          "computed": false
+        }
+      },
+      "setProps": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "Dash-assigned callback that should be called to report property changes\nto Dash, to make them available for callbacks."
+      },
+      "persistence": {
+        "type": {
+          "name": "union",
+          "value": [
+            {
+              "name": "bool"
+            },
+            {
+              "name": "string"
+            },
+            {
+              "name": "number"
+            }
+          ]
+        },
+        "required": false,
+        "description": "Used to allow user interactions in this component to be persisted when\nthe component - or the page - is refreshed. If `persisted` is truthy and\nhasn't changed from its previous value, a `value` that the user has\nchanged while using the app will keep that change, as long as\nthe new `value` also matches what was given originally.\nUsed in conjunction with `persistence_type`."
+      },
+      "persisted_props": {
+        "type": {
+          "name": "arrayOf",
+          "value": {
+            "name": "enum",
+            "value": [
+              {
+                "value": "'value'",
+                "computed": false
+              }
+            ]
+          }
+        },
+        "required": false,
+        "description": "Properties whose user interactions will persist after refreshing the\ncomponent or the page. Since only `value` is allowed this prop can\nnormally be ignored.",
+        "defaultValue": {
+          "value": "['value']",
+          "computed": false
+        }
+      },
+      "persistence_type": {
+        "type": {
+          "name": "enum",
+          "value": [
+            {
+              "value": "'local'",
+              "computed": false
+            },
+            {
+              "value": "'session'",
+              "computed": false
+            },
+            {
+              "value": "'memory'",
+              "computed": false
+            }
+          ]
+        },
+        "required": false,
+        "description": "Where persisted user changes will be stored:\nmemory: only kept in memory, reset on page refresh.\nlocal: window.localStorage, data is kept after the browser quit.\nsession: window.sessionStorage, data is cleared once the browser quit.",
+        "defaultValue": {
+          "value": "'local'",
+          "computed": false
+        }
+      }
+    }
+  }
+}

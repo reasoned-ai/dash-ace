@@ -1,5 +1,5 @@
 import dash
-import dash_ace
+import dash_ace_persistent
 import dash_html_components as html
 from dash.dependencies import Input, Output
 import flask
@@ -26,7 +26,7 @@ syntaxKeywords = {
 
 syntaxFolds = "\\:="
 
-ace_editor = dash_ace.DashAceEditor(
+ace_editor = dash_ace_persistent.DashAceEditor(
         id='demo-editor',
         value='test(a: Integer) -> String := \n    return f"value is {a}"',
         theme='github',

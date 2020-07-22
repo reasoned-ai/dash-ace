@@ -50,6 +50,14 @@ app.layout = html.Div([
 
 
 @app.callback(
+    Output('output', 'children'),
+    [Input("demo-editor", "value")]
+)
+def value_change(code):
+    return code
+
+
+@app.callback(
     [Output(component_id='demo-editor', component_property='value'),
      Output(component_id='diff-btn', component_property='children')],
     [Input('diff-btn', 'n_clicks')]

@@ -73,6 +73,11 @@ export default class DashAceEditor extends Component {
         setFontSize(currentFontSize - 2);
     }
 
+    saveAndRun(editor, callback) {
+        const code = editor.getValue();
+        callback(code)
+    }
+
     render() {
         const {id, mode, theme, className, value, focus, placeholder, fontSize, showGutter, showPrintMargin,
             highlightActiveLine, cursorStart, wrapEnabled, readOnly, minLines, maxLines, width, height,
@@ -90,6 +95,11 @@ export default class DashAceEditor extends Component {
                 name: 'decreaseFontSize',
                 bindKey: {win: 'Ctrl--', mac: 'Command--'},
                 exec: () => { this.decreaseFontSize(this.refs.aceEditor.editor, fz => setProps({fontSize: fz})) }
+            },
+            {
+                name: 'saveAndRun',
+                bindKey: {win: 'Ctrl-s', mac: 'Command-s'},
+                exec: () => { this.saveAndRun(this.refs.aceEditor.editor, code => setProps({ value: code }))}
             }
         ];
 
@@ -101,7 +111,6 @@ export default class DashAceEditor extends Component {
                     theme={theme}
                     value={value}
                     className={classnames('container__editor', className)}
-                    onChange={code => setProps({ value: code })}
                     onLoad={split => this.customizeSplit(split)}
                     name={id}
                     fontSize={fontSize}
@@ -135,7 +144,6 @@ export default class DashAceEditor extends Component {
                 theme={theme}
                 value={value}
 				        className={classnames('container__editor', className)}
-                onChange={code => setProps({ value: code })}
                 onLoad={editor => this.customize(editor)}
                 name={id}
                 placeholder={placeholder}

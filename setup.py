@@ -24,7 +24,7 @@ setup(
     author_email="xu@reasoned.ai",
     long_description=long_description,
     long_description_content_type='text/markdown',
-    python_requires='>=3.6.0',
+    python_requires='>=3.7.0',
     url=package['homepage'],
     packages=[package_name],
     include_package_data=True,

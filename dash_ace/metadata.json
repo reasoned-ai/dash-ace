@@ -58,6 +58,22 @@
           }
         ],
         "returns": null
+      },
+      {
+        "name": "saveAndRun",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "editor",
+            "type": null
+          },
+          {
+            "name": "callback",
+            "type": null
+          }
+        ],
+        "returns": null
       }
     ],
     "props": {

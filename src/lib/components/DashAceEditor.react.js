@@ -30,7 +30,7 @@ export default class DashAceEditor extends Component {
     }
 
     customize(editor) {
-        const {autocompleter, prefixLine, triggerWords, triggerCaseInsensitive, syntaxKeywords, syntaxFolds} = this.props;
+        const {autocompleter, syntaxKeywords, syntaxFolds} = this.props;
 
         if (this.props.mode !== 'python' && this.props.mode !== 'javascript' && this.props.mode !== 'sql') {
             editor.getSession().setMode(new CustomMode(syntaxKeywords, syntaxFolds));
@@ -38,26 +38,21 @@ export default class DashAceEditor extends Component {
 
         if (autocompleter) {
             const langTools = window.ace.acequire("ace/ext/language_tools");
-            const reg = triggerWords? new RegExp(triggerWords.map(w => {return w + "\\s*$"}).join('|'),
-                triggerCaseInsensitive?'i':null) : null;
             const completer = {
                 getCompletions: function(editor, session, pos, prefix, callback) {
-                    const line = (prefix.length === 0 && prefixLine) ?
-                        editor.getValue().split('\n')[pos.row].substring(0, pos.column) : prefix;
-                    if (reg === null || reg.test(line)) {
-                        fetch(autocompleter + line)
-                            .then(response => response.json())
-                            .then(wordList => {
-                                callback(null, wordList);
-                            })
-                            .catch((error) => {
-                                console.error(error)
-                            })
-                    }
-                    callback(null, []);
+                    const line = editor.getValue().split('\n')[pos.row].substring(0, pos.column);
+
+                    fetch(autocompleter + line)
+                        .then(response => response.json())
+                        .then(wordList => {
+                            callback(null, wordList);
+                        })
+                        .catch((error) => {
+                            console.error(error)
+                        })
                 }
             };
-            langTools.addCompleter(completer);
+            langTools.setCompleters([completer]);
         }
     }
 
@@ -85,7 +80,7 @@ export default class DashAceEditor extends Component {
             editorProps, setOptions, keyboardHandler, commands, annotations, markers, style, orientation,
             setProps} = this.props;
 
-        const fontAdjust = [
+        const defaultCommands = [
             {
                 name: 'increaseFontSize',
                 bindKey: {win: 'Ctrl-=', mac: 'Command-='},
@@ -167,7 +162,7 @@ export default class DashAceEditor extends Component {
                 editorProps={editorProps}
                 setOptions={setOptions}
                 keyboardHandler={keyboardHandler}
-                commands={commands?fontAdjust.concat(commands):fontAdjust}
+                commands={commands?defaultCommands.concat(commands):defaultCommands}
                 annotations={annotations}
                 markers={markers}
                 style={style}

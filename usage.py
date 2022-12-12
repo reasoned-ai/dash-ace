@@ -35,10 +35,10 @@ ace_editor = dash_ace.DashAceEditor(
         syntaxKeywords=syntaxKeywords,
         syntaxFolds=syntaxFolds,
         enableBasicAutocompletion=True,
+        enableSnippets=True,
         enableLiveAutocompletion=True,
         autocompleter='/autocompleter?prefix=',
         prefixLine=True,
-        triggerWords=[':', '\\.', '::'],
         placeholder='Norm code ...',
     )
 
@@ -74,7 +74,7 @@ def update_output_editor(n_clicks):
 
 @server.route('/autocompleter', methods=['GET'])
 def autocompleter():
-    server.logger.info('receiving auto completing request with prefix: ' + request.args.get('prefix'))
+    print('receiving auto completing request with prefix: ' + request.args.get('prefix'))
     return jsonify([{"name": "Completed", "value": "Completed", "score": 300, "meta": "test"}])
 
 

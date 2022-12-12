@@ -74,7 +74,7 @@ export default class DashAceEditor extends Component {
     }
 
     render() {
-        const {id, mode, theme, className, value, focus, placeholder, fontSize, showGutter, showPrintMargin,
+        const {id, mode, theme, className, value, selection, focus, placeholder, fontSize, showGutter, showPrintMargin,
             highlightActiveLine, cursorStart, wrapEnabled, readOnly, minLines, maxLines, width, height,
             enableBasicAutocompletion, enableLiveAutocompletion, enableSnippets, tabSize, debounceChangePeriod,
             editorProps, setOptions, keyboardHandler, commands, annotations, markers, style, orientation,
@@ -137,6 +137,7 @@ export default class DashAceEditor extends Component {
 				        className={classnames('container__editor', className)}
                 onChange={code => setProps({ value: code })}
                 onLoad={editor => this.customize(editor)}
+                onSelectionChange={v => setProps({ selection: v })}
                 name={id}
                 placeholder={placeholder}
                 fontSize={fontSize}
@@ -183,6 +184,7 @@ DashAceEditor.defaultProps = {
     },
     theme: 'github',
     value: '',
+    selection: {},
     fontSize: 14,
     focus: false,
     showGutter: true,
@@ -213,6 +215,11 @@ DashAceEditor.propTypes = {
      * The value displayed in the input.
      */
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
+
+    /**
+     * The selection range information
+     */
+    selection: PropTypes.object,
 
     /**
      * Often used with CSS to style elements with common properties.

@@ -11,5 +11,3 @@ BugReports: https://github.com/reasoned-ai/dash-ace/issues
 Encoding: UTF-8
 LazyData: true
 KeepSource: true
-Author: xu miao [aut]
-Maintainer: xu miao <xu@reasoned.ai>
